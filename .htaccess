@@ -1,0 +1,10 @@
+Options All -Indexes
+
+RewriteEngine On
+RewriteRule ^([-a-zA-Z0-9/&=]+)$ index.php?ruta=$1
+RewriteRule ^([-a-zA-Z0-9/&=]+)$ index.php?ruta=$1&id=$2
+RewriteRule ^([-a-zA-Z0-9/&=]+)$ index.php?ruta=$1&fecha=$2
+RewriteRule ^([-a-zA-Z0-9/&=]+)$ index.php?ruta=$1&pagina=$2
+RewriteRule ^([-a-zA-Z0-9/&=]+)$ index.php?ruta=$1&nuevo=$2&accion=$3
+RewriteRule ^([-a-zA-Z0-9/&=]+)$ index.php?ruta=$1&id=$2&hora=$3
+RewriteRule ^([-a-zA-Z0-9/&=]+)$ index.php?ruta=$1&id=$2&post=$3
