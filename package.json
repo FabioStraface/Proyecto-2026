@@ -1,0 +1,13 @@
+{
+  "name": "proyecto-2026",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/input.css -o ./views/assets/css/app.css --minify",
+    "watch:css": "tailwindcss -i ./src/input.css -o ./views/assets/css/app.css --watch"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "tailwindcss": "^4.3.3"
+  }
+}

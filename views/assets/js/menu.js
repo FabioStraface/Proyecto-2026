@@ -22,12 +22,10 @@ $(function() {
         $this.prepend('<span class="arrow-collapse collapsed">');
 
         $this.find('.arrow-collapse').attr({
-          'data-toggle' : 'navbar-collapse',
           'data-target' : '#collapseItem' + counter,
         });
 
-        $this.find('> ul').attr({
-          'class' : 'navbar-collapse',
+        $this.find('> ul').addClass('submenu-panel').attr({
           'id' : 'collapseItem' + counter,
         });
 
@@ -39,13 +37,16 @@ $(function() {
 
 		$('body').on('click', '.arrow-collapse', function(e) {
       var $this = $(this);
-      if ( $this.closest('li').find('.navbar-collapse').hasClass('show') ) {
-        $this.removeClass('active');
+      var $panel = $this.closest('li').children('ul');
+      e.preventDefault();
+
+      if ( $panel.hasClass('is-open') ) {
+        $panel.removeClass('is-open');
+        $this.addClass('collapsed').removeClass('active');
       } else {
-        $this.addClass('active');
+        $panel.addClass('is-open');
+        $this.removeClass('collapsed').addClass('active');
       }
-      e.preventDefault();  
-      
     });
 
 		$(window).resize(function() {

@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Your Mail Has Been Send Successfully.</title>
+			<link rel="stylesheet" href="views/assets/css/app.css">
 			<!-- Latest Bootstrap min CSS -->
 		<link rel="stylesheet" href="views/assets/bootstrap/css/bootstrap.min.css">	
 	<style>

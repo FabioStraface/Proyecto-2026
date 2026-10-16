@@ -1,35 +1,35 @@
 <!-- START PARTNER LOGO -->
     <div class="partner-logo section-padding">
-        <div class="container">										
-            <div class="row text-center">
-                <div class="col-lg-2 col-sm-4 col-xs-12 no-padding wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="0">
+        <div class="site-container">										
+            <div class="flex flex-wrap text-center">
+                <div class="w-full p-0 min-[576px]:w-1/3 min-[992px]:w-1/6 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="0">
                     <div class="single_logo single_logo_bm">
-                        <a href="#"><img src="views/assets/img/partner/1.png" alt="" class="img-fluid"/></a>
+                        <a href="#"><img src="views/assets/img/partner/1.png" alt="" class="h-auto max-w-full"/></a>
                     </div>						
                 </div><!--- END COL -->
-                <div class="col-lg-2 col-sm-4 col-xs-12 no-padding wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.2s" data-wow-offset="0">
+                <div class="w-full p-0 min-[576px]:w-1/3 min-[992px]:w-1/6 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.2s" data-wow-offset="0">
                     <div class="single_logo">
-                        <a href="#"><img src="views/assets/img/partner/2.png" alt="" class="img-fluid"/></a>
+                        <a href="#"><img src="views/assets/img/partner/2.png" alt="" class="h-auto max-w-full"/></a>
                     </div>						
                 </div><!--- END COL -->
-                <div class="col-lg-2 col-sm-4 col-xs-12 no-padding wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s" data-wow-offset="0">
+                <div class="w-full p-0 min-[576px]:w-1/3 min-[992px]:w-1/6 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s" data-wow-offset="0">
                     <div class="single_logo single_logo_bm">
-                        <a href="#"><img src="views/assets/img/partner/3.png" alt="" class="img-fluid"/></a>
+                        <a href="#"><img src="views/assets/img/partner/3.png" alt="" class="h-auto max-w-full"/></a>
                     </div>						
                 </div><!--- END COL -->
-                <div class="col-lg-2 col-sm-4 col-xs-12 no-padding wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.4s" data-wow-offset="0">
+                <div class="w-full p-0 min-[576px]:w-1/3 min-[992px]:w-1/6 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.4s" data-wow-offset="0">
                     <div class="single_logo">
-                        <a href="#"><img src="views/assets/img/partner/4.png" alt="" class="img-fluid"/></a>
+                        <a href="#"><img src="views/assets/img/partner/4.png" alt="" class="h-auto max-w-full"/></a>
                     </div>						
                 </div><!--- END COL -->
-                <div class="col-lg-2 col-sm-4 col-xs-12 no-padding wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.5s" data-wow-offset="0">
+                <div class="w-full p-0 min-[576px]:w-1/3 min-[992px]:w-1/6 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.5s" data-wow-offset="0">
                     <div class="single_logo">
-                        <a href="#"><img src="views/assets/img/partner/5.png" alt="" class="img-fluid"/></a>
+                        <a href="#"><img src="views/assets/img/partner/5.png" alt="" class="h-auto max-w-full"/></a>
                     </div>						
                 </div><!--- END COL -->
-                <div class="col-lg-2 col-sm-4 col-xs-12 no-padding wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.6s" data-wow-offset="0">
+                <div class="w-full p-0 min-[576px]:w-1/3 min-[992px]:w-1/6 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.6s" data-wow-offset="0">
                     <div class="single_logo">
-                        <a href="#"><img src="views/assets/img/partner/6.png" alt="" class="img-fluid"/></a>
+                        <a href="#"><img src="views/assets/img/partner/6.png" alt="" class="h-auto max-w-full"/></a>
                     </div>						
                 </div><!--- END COL -->
             </div><!--- END ROW -->
@@ -39,9 +39,9 @@
     
     <!-- START FOOTER -->
     <div class="footer" style="background-image: url(views/assets/img/bg/footer.png);  background-size:cover;">
-        <div class="container">		
-            <div class="row footer_bg">						
-                <div class="col-lg-3 col-sm-6 col-xs-12">
+        <div class="site-container">		
+            <div class="footer_bg flex flex-wrap">						
+                <div class="w-full min-[576px]:w-1/2 min-[992px]:w-1/4">
                     <div class="footer_logo">
                         <img src="views/assets/img/logo.png" alt="" />
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae risus nec dui venenatis dignissim.</p>
@@ -55,7 +55,7 @@
                         </ul>
                     </div>							
                 </div><!--- END COL -->						
-                <div class="col-lg-3 col-sm-6 col-xs-12">
+                <div class="w-full min-[576px]:w-1/2 min-[992px]:w-1/4">
                     <div class="single_footer">
                         <h4>Frequently Asked Questions</h4>
                         <ul>
@@ -67,7 +67,7 @@
                         </ul>
                     </div>
                 </div><!--- END COL -->	
-                <div class="col-lg-3 col-sm-6 col-xs-1">
+                <div class="w-full min-[576px]:w-1/2 min-[992px]:w-1/4">
                     <div class="single_footer">
                         <h4>Company</h4>
                         <ul>
@@ -79,11 +79,11 @@
                         </ul>
                     </div>
                 </div><!--- END COL -->
-                <div class="col-lg-3 col-sm-6 col-xs-12">
+                <div class="w-full min-[576px]:w-1/2 min-[992px]:w-1/4">
                     <div class="newsletter-form">
                         <h4>Subscribe for get updates</h4>
                             <form id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate">
-                            <div class="input-group input-group-lg newsletter">
+                            <div class="newsletter flex w-full flex-col">
                                 <input type="email" name="EMAIL" class="subscribe__input" placeholder="Email Address">
                                 <button type="submit" class="subs_btn">Subscribe</button>
                             </div>
@@ -96,8 +96,8 @@
                     </div>
                 </div><!--- END COL -->		
             </div><!--- END ROW -->		
-            <div class="row">
-                <div class="col-lg-12 text-center">
+            <div class="flex flex-wrap">
+                <div class="w-full text-center">
                     <div class="footer_copyright">
                         <p>&copy; 2026 Monoline. All Rights Reserved by <a href="https://bestwpware.com/" target="_blank">Bestwpware</a></p>
             <p>Distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a></p>

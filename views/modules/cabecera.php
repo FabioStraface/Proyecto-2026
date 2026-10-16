@@ -11,7 +11,7 @@
     <meta name="keywords" content="agency, business, corporate, creative, html5, modern, multipurpose, One Page, parallax, startup ">		
     <!-- SITE TITLE -->
     <title>Monoline - Design Agency HTML Template</title>			
-    <!-- Latest Bootstrap min CSS -->
+    <!-- Latest Bootstrap min CSS (sigue activo en páginas aún no migradas) -->
     <link rel="stylesheet" href="views/assets/bootstrap/css/bootstrap.min.css">		
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800"> 
@@ -31,7 +31,9 @@
     <!-- Style CSS -->						
     <link rel="stylesheet" href="views/assets/css/menu.css">			
     <link rel="stylesheet" href="views/assets/css/style.css">			
-    <link rel="stylesheet" href="views/assets/css/responsive.css">			
+    <link rel="stylesheet" href="views/assets/css/responsive.css">
+    <!-- Tailwind CSS v4: al final para que las utilidades de cabecera/footer no las pise Bootstrap -->
+    <link rel="stylesheet" href="views/assets/css/app.css">
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -62,14 +64,14 @@
     </div>
     
     <header class="site-navbar js-sticky-header site-navbar-target" role="banner">
-        <div class="container">
-        <div class="row align-items-center">       
-            <div class="col-6 col-xl-2">
+        <div class="site-container">
+        <div class="flex items-center">       
+            <div class="w-1/2 min-[1200px]:w-2/12">
             <h1 class="mb-0 site-logo"><a href="inicio"><img src="views/assets/img/logo.png" alt=""></a></h1>
             </div>
-            <div class="col-12 col-md-10 d-none d-xl-block">
-            <nav class="site-navigation position-relative text-right" role="navigation">
-                <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">	
+            <div class="hidden w-full min-[1200px]:block min-[1200px]:w-10/12">
+            <nav class="site-navigation relative text-right" role="navigation">
+                <ul class="site-menu main-menu js-clone-nav mr-auto hidden min-[992px]:block">	
                     <li><a class="nav-link" href="about">Sobre Nosotros</a></li>
                     <li class="has-children">
                         <a href="servicios" class="nav-link">Servicios</a>
@@ -120,8 +122,8 @@
                 </ul>
             </nav>
             </div>
-            <div class="col-6 d-inline-block d-xl-none ml-md-0 py-3" style="position: relative; top: 3px;">
-            <a href="#" class="site-menu-toggle js-menu-toggle float-right"><span class="icon-menu h3"></span></a>
+            <div class="relative top-[3px] inline-block w-1/2 py-4 min-[1200px]:hidden">
+            <a href="#" class="site-menu-toggle js-menu-toggle float-right"><span class="icon-menu text-[1.75rem] leading-none"></span></a>
             </div>
         </div>
         </div>
