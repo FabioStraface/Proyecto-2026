@@ -38,7 +38,7 @@
                         <div class="home_blog_content">
                             <div class="blog_title_info">
                                 <h2><a href="blog-single&id=<?= $valor['id_torneo'] ?>"><?= $valor['nombre'] ?></a></h2>
-                                <span><?= $valor['fecha_inicio'] ?> - <?= $valor['fecha_fin'] ?></span>
+                                <span><?= date("d/m/Y", strtotime($valor['fecha_inicio'])) ?> - <?= date("d/m/Y", strtotime($valor['fecha_fin'])) ?></span>
                                 <span><a href="blog-single&id=<?= $valor['id_torneo'] ?>"><?= $region['localidad'] ?></a></span>
                             </div>
                             <p><?= $valor['descripcion'] ?></p>

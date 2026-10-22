@@ -19,4 +19,12 @@ class TorneoController{
         return $respuesta;
     }
 
+    public function ctrSacarTotalAsistentes($id)
+    {
+        $tabla = "torneo_jugador";
+        $campo = "id_torneos";
+        $total = TorneoModel::Total_registros($tabla, $campo, $id);
+        return $total;
+    }
+
 }

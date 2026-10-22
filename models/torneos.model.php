@@ -26,4 +26,13 @@ class TorneoModel{
         $sentencia = null;
     }
 
+    public static function Total_registros($tabla, $campo, $id)
+    {
+        $conexion = Conexion::conectar();
+        $consulta="SELECT SQL_CALC_FOUND_ROWS * FROM $tabla WHERE $campo LIKE '$id'";
+        $registros = $conexion->query($consulta);
+        $total = $registros->rowCount();
+        return $total;
+    }
+
 }

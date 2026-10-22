@@ -20,7 +20,21 @@
         <?php
             }
         ?>
-    </div>				
+    </div>		
+    <?php
+        if (isset($_GET['id'])) 
+        {
+    ?>
+    <div class="categories">
+        <h4 class="blog_sidebar_title">Nuestro Torneo</h4>
+        <ul>
+            <li><a href="torneo-resumen&id=<?= $_GET['id'] ?>"><i class="ti-arrow-right"></i>Bracket</a></li>
+            <li><a href="asistentes&id=<?= $_GET['id'] ?>"><i class="ti-arrow-right"></i>Asistentes</a></li>
+        </ul>
+    </div>	
+    <?php
+        }
+    ?>		
     <div class="tag">
         <h4 class="blog_sidebar_title">Regiones</h4><!-- Falta hacer enlaces de busqueda con js -->
         <?php
