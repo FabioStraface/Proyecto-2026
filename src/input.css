@@ -36,3 +36,52 @@
         max-width: 1140px;
     }
 }
+
+/* Fuera de @layer para ganar a Bootstrap (azul) y a style.css (hover blanco en <a>). */
+.pool-card-link,
+.pool-card-link:link,
+.pool-card-link:visited,
+.pool-card-link:hover,
+.pool-card-link:focus,
+.pool-card-link:active {
+    color: #111827 !important;
+    text-decoration: none !important;
+    font-family: "Poppins", sans-serif !important;
+}
+
+.pool-card-link strong,
+.pool-card-link .pool-player {
+    color: #111827 !important;
+}
+
+.pool-card-link .pool-muted {
+    color: #9ca3af !important;
+    flex: 0 0 auto;
+}
+
+.pool-card-link .pool-check {
+    color: #fff !important;
+}
+
+.pool-card-link .pool-player-list {
+    display: flex;
+    flex: 1 1 auto;
+    min-width: 0;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 1.25rem;
+}
+
+.pool-card-link .pool-player {
+    display: inline-flex;
+    flex: 0 0 auto;
+    max-width: none;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.25rem;
+    font-size: 0.8125rem;
+    line-height: 1.2;
+    font-weight: 600;
+    white-space: nowrap;
+}
