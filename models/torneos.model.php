@@ -15,4 +15,15 @@ class TorneoModel{
         $sentencia = null;
     }
 
+    public static function mdlSacarTorneo($tabla, $campo, $id)
+    {
+        $conexion = Conexion::conectar();
+        $consulta = $conexion->query("SELECT * FROM $tabla WHERE $campo LIKE '$id'");
+        $registros = $consulta->fetch();
+        return $registros;
+
+        $sentencia->close();
+        $sentencia = null;
+    }
+
 }

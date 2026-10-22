@@ -11,4 +11,12 @@ class TorneoController{
         return $respuesta;
     }
 
+    public function ctrSacarTorneo($id)
+    {
+        $tabla = "torneo";
+        $campo = "id_torneo";
+        $respuesta = TorneoModel::mdlSacarTorneo($tabla,$campo,$id);
+        return $respuesta;
+    }
+
 }

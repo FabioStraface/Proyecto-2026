@@ -18,6 +18,9 @@
             $_GET['ruta'] == 'contacto' ||
 			$_GET['ruta'] == 'misBlog' ||
 			$_GET['ruta'] == 'carrito' ||
+			$_GET['ruta'] == 'torneo-resumen' ||
+			$_GET['ruta'] == 'bracket-pools' ||
+			$_GET['ruta'] == 'bracket-final' ||
 			$_GET['ruta'] == 'logout') {
 			
 			include ('modules/'.$_GET['ruta'].'.php');

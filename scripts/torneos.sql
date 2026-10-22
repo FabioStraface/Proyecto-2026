@@ -92,15 +92,17 @@ CREATE TABLE `torneo` (
  `img` varchar(150) NOT NULL DEFAULT 'torneo_default.png',
  `id_ranking` int(5) NOT NULL,
  `id_region` int(5) NOT NULL,
+ `id_usuario` int(5) NOT NULL,
   CONSTRAINT fk_ranking FOREIGN KEY (id_ranking) REFERENCES ranking(id) ON DELETE restrict ON UPDATE cascade,
-  CONSTRAINT fk_region_torneo FOREIGN KEY (id_region) REFERENCES region(id) ON DELETE restrict ON UPDATE cascade
+  CONSTRAINT fk_region_torneo FOREIGN KEY (id_region) REFERENCES region(id) ON DELETE restrict ON UPDATE cascade,
+  CONSTRAINT fk_jugador_torneo FOREIGN KEY (id_usuario) REFERENCES jugador(id) ON DELETE restrict ON UPDATE cascade
 );
 
-INSERT INTO `torneo` (`id_torneo`, `nombre`, `lugar`, `descripcion`, `fecha_inicio`, `fecha_fin`, `img`,`id_ranking`, `id_region`) VALUES
-(1,'RPLHouse','Sevilla','Torneo principal de la temporada','2026-10-23 13:13:00','2026-10-25 13:13:00', '1.jpg',1, 2),
-(2,'Sherry','Jerez de la frontera','Torneo para jugadores de las posiciones inferiores','2026-12-12 13:13:00','2026-12-14 13:13:00', '2.jpg',3, 8),
-(3,'Area Zero','Madrid','Torneo para jugadores de nivel intermedio','2026-12-23 13:13:00','2026-12-25 13:13:00', '3.jpg',4, 3),
-(4,'Tram segunda parada','Barcelona','Torneo Nacional donde se reune el mejor nivel','2026-12-28 13:13:00','2026-12-31 13:13:00', '1.jpg',2, 4);
+INSERT INTO `torneo` (`id_torneo`, `nombre`, `lugar`, `descripcion`, `fecha_inicio`, `fecha_fin`, `img`,`id_ranking`, `id_region`, `id_usuario`) VALUES
+(1,'RPLHouse','Sevilla','Torneo principal de la temporada','2026-10-23 13:13:00','2026-10-25 13:13:00', '1.jpg',1, 2, 2),
+(2,'Sherry','Jerez de la frontera','Torneo para jugadores de las posiciones inferiores','2026-12-12 13:13:00','2026-12-14 13:13:00', '2.jpg',3, 8, 3),
+(3,'Area Zero','Madrid','Torneo para jugadores de nivel intermedio','2026-12-23 13:13:00','2026-12-25 13:13:00', '3.jpg',4, 3, 5),
+(4,'Tram segunda parada','Barcelona','Torneo Nacional donde se reune el mejor nivel','2026-12-28 13:13:00','2026-12-31 13:13:00', '1.jpg',2, 4, 3);
 
 CREATE TABLE `torneo_jugador` (
  `id` int(5) NOT NULL PRIMARY KEY AUTO_INCREMENT,

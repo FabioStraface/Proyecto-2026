@@ -1,12 +1,19 @@
 <?php include("cabecera.php"); ?>	
 
+<?php
+    $torneo = new TorneoController();
+    $valor = $torneo->ctrSacarTorneo($_GET['id']);
+    $jugadores = new UsuarioController();
+    $jugador = $jugadores->ctrSacarUsuario($valor['id_usuario']);
+?>
+
 <!-- START SECTION TOP -->
     <section class="section-top" style="background-image: url(views/assets/img/bg/section-top.png);background-size:cover; background-position: center center;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-sm-12 col-xs-12 text-center">
                 <div class="section-top-title">
-                    <h1>Blog Single Page Post</h1>		
+                    <h1><?= $valor['nombre'] ?></h1>		
                 </div>
                 </div><!--- END COL -->				  
             </div><!--- END ROW -->
@@ -21,106 +28,19 @@
                 <div class="col-lg-8 col-sm-12 col-xs-12">
                     <div class="post-slide-blog">
                         <div class="blog-img bc_bottom">
-                            <img src="views/assets/img/blog/1.jpg" class="img-fluid" alt="image" />
+                            <img src="views/assets/img/blog/<?= $valor['img'] ?>" class="img-fluid" alt="image" />
                         </div>
-                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using is that it has a more-or-less normal distribution of letters, as opposed to using here making it look like readable English. Many desktop publishing packages. <br /><br />
-                        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using is that it has a more-or-less normal distribution of letters, as opposed to using here making it look like readable English. Many desktop publishing packages.</p>
-                        <p class="bc_left">The point of using is that it has a more-or-less normal distribution of letters, as opposed to using here making it look like readable English.</p>
+                        <p><?= $valor['descripcion'] ?></p>
                     </div>
                     <div class="author_part">
-                        <h3 class="blog_head_title">About the author</h3>
+                        <h3 class="blog_head_title">AUTOR: <?= $jugador['usuario'] ?></h3>
                         <div class="single_author">
-                            <img src="views/assets/img/blog/author.jpg" alt="" />
-                            <h4>Marina Mojo</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ultricies quam nisi, vel gravida enim accumsan id. Praesent justo quam, auctor et lorem in, pulvinar ornare orci.</p> 
+                            <img src="views/assets/img/blog/<?= $jugador['img'] ?>" alt="" />
+                            <h1 style="padding-top: 0.7em;"><?= $jugador['nombre'] ?> <?= $jugador['apellidos'] ?></h4>
                         </div>
-                    </div><!--- END AUTHOR PART -->
-                    <div class="comments_part">
-                        <h3 class="blog_head_title">Comments</h3>
-                        <div class="single_comment">
-                            <img src="views/assets/img/blog/c1.jpg" alt="" />
-                            <h4>Ayoub Fennouni</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ultricies quam nisi, vel gravida enim accumsan id. Praesent justo quam, auctor et lorem in, pulvinar ornare orci.</p>
-                        </div><!--- END SINGLE COMMENT -->
-                        <div class="single_comment single_comment_mbnone">
-                            <img src="views/assets/img/blog/c2.jpg" alt="" />
-                            <h4>Mark Linomi</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ultricies quam nisi, vel gravida enim accumsan id. Praesent justo quam, auctor et lorem in, pulvinar ornare orci.</p>
-                        </div><!--- END SINGLE COMMENT -->
-                    </div><!--- END COMMENTS PART -->	
-                    <div class="comment_form">
-                        <h3 class="blog_head_title">Add a Comment</h3>
-                        <div class="contact comment-box">
-                            <form id="contact-form" method="post" enctype="multipart/form-data">
-                                <div class="row">
-                                    <div class="form-group col-md-6">
-                                        <input type="text" name="name" class="form-control" id="first-name" placeholder="Name" required="required">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <input type="email" name="email" class="form-control" id="first-email" placeholder="Email" required="required">
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                        <input type="text" name="subject" class="form-control" id="subject" placeholder="Subject" required="required">
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                        <textarea rows="6" name="message" class="form-control" id="description" placeholder="Your Message" required="required"></textarea>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="actions">
-                                            <button type="submit" value="Send message" name="submit" id="submitButton" class="btn btn-lg btn_one" title="Submit Your Message!">Submit Comment</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div><!--- END COMMENT FORM -->						
+                    </div><!--- END AUTHOR PART -->			
                 </div><!-- END COL-->		
-                <div class="col-lg-4 col-sm-12 col-xs-12">
-                    <div class="blog_search">
-                        <input type="text" class="form-control" placeholder="Type & Press Enter">
-                    </div>
-                    <div class="latest_blog wow fadeInRight">
-                        <h4 class="blog_sidebar_title">Latest Blog</h4>
-                        <div class="single_latest_blog">							
-                            <a href="#"><h4>Successful analysis can become the key to your business success.</h4></a>						
-                        </div>
-                        <div class="single_latest_blog">							
-                            <a href="#"><h4>How a good team can positively influence your business.</h4></a>						
-                        </div>
-                        <div class="single_latest_blog">							
-                            <a href="#"><h4>Good partnerships can help your company achieve better results.</h4></a>						
-                        </div>
-                    </div>
-                    <div class="categories">
-                        <h4 class="blog_sidebar_title">Categories</h4>
-                        <ul>
-                            <li><a href="#"><i class="ti-arrow-right"></i> Photography</a></li>
-                            <li><a href="#"><i class="ti-arrow-right"></i> Business</a></li>
-                            <li><a href="#"><i class="ti-arrow-right"></i> Responsive Design</a></li>
-                            <li><a href="#"><i class="ti-arrow-right"></i> Web Design</a></li>
-                            <li><a href="#"><i class="ti-arrow-right"></i> Branding</a></li>
-                            <li><a href="#"><i class="ti-arrow-right"></i> Marketing</a></li>
-                        </ul>
-                    </div>					
-                    <div class="video_post wow fadeInRight">
-                        <h4 class="blog_sidebar_title">Video Widget</h4>
-                        <iframe src="https://player.vimeo.com/video/62026718"></iframe>			
-                    </div>
-                    <div class="tag">
-                        <h4 class="blog_sidebar_title">Tag cloud</h4>
-                        <a href="#">Design</a>
-                        <a href="#">Development</a>
-                        <a href="#">Seo</a>
-                        <a href="#">Responsive</a>
-                        <a href="#">Photopgraphy</a>
-                        <a href="#">How to build</a>
-                        <a href="#">All project</a>
-                        <a href="#">Clean Design</a>
-                    </div>
-                    <div class="banner">
-                        <a href="#"><img src="views/assets/img/blog/banner_3.jpg" class="img-fluid" alt="" /></a>
-                    </div>
-                </div><!--- END COL -->					
+                <?php include("blog-parte-derecha.php"); ?>			
             </div><!-- END ROW-->
         </div><!-- END CONTAINER-->
     </section>
