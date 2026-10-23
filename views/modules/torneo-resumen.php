@@ -17,11 +17,15 @@
 <?php
     $torneo = new TorneoController();
     $Asistentes = $torneo->ctrSacarTotalAsistentes($_GET['id']); //Esto saca todos los usuarios apuntados a este torneo
-    //var_dump($Asistentes);
     $valor = $torneo->ctrSacarTorneo($_GET['id']); //Saca todos los datos del torneo correspondiente
+
+    // Fechas actuales y del torneo
     $fechaActual = date("d/m/Y");
     $fechaInicio = date("d/m/Y", strtotime($valor['fecha_inicio']));
     $fechaFinal = date("d/m/Y", strtotime($valor['fecha_fin']));
+
+    //Pools
+    $pools = $torneo->ctrSacarPools($_GET['id']);
 ?>
 
 <section class="bg-[#f4f6f8] px-4 py-10 font-sans md:py-14">
@@ -78,6 +82,10 @@
             </div>
             
             <ul class="m-0 list-none divide-y divide-gray-200 border-t border-gray-200 p-0">
+                <?php
+                    /*foreach ($pools as $key => $pool) 
+                    {*/
+                ?>
                 <li class="m-0">
                     <a href="bracket-pools&id=<?= $_GET['id'] ?>" class="pool-card-link flex flex-col gap-3 px-5 py-4 font-sans no-underline hover:bg-gray-50 md:flex-row md:items-center md:justify-between md:gap-6 md:px-6">
                         <div class="min-w-[120px]">
@@ -94,7 +102,33 @@
                                 <span class="pool-check inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#16a34a]"><svg class="block h-2.5 w-2.5" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.2L4.8 8.5L9.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                             </span>
                             <span class="pool-player">
-                                <span>BH/S...</span>
+                                <span>PlatiniumK</span>
+                                <span class="pool-check inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#16a34a]"><svg class="block h-2.5 w-2.5" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.2L4.8 8.5L9.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                            </span>
+                            <span class="pool-player">
+                                <span>LREX D-Stunk</span>
+                                <span class="pool-check inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#16a34a]"><svg class="block h-2.5 w-2.5" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.2L4.8 8.5L9.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                            </span>
+                            <span class="pool-muted shrink-0 text-sm font-normal">+4 más</span>
+                        </div>
+                    </a>
+                </li>
+                <?php
+                    //}
+                ?>
+                <li class="m-0">
+                    <a href="bracket-pools&id=<?= $_GET['id'] ?>" class="pool-card-link flex flex-col gap-3 px-5 py-4 font-sans no-underline hover:bg-gray-50 md:flex-row md:items-center md:justify-between md:gap-6 md:px-6">
+                        <div class="min-w-[120px]">
+                            <strong class="block text-base font-semibold">Pool A1</strong>
+                            <span class="pool-muted mt-0.5 block text-sm font-normal">Complete</span>
+                        </div>
+                        <div class="pool-player-list">
+                            <span class="pool-player">
+                                <span>GameOverGlitch</span>
+                                <span class="pool-check inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#16a34a]"><svg class="block h-2.5 w-2.5" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.2L4.8 8.5L9.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                            </span>
+                            <span class="pool-player">
+                                <span>Aleloco8</span>
                                 <span class="pool-check inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#16a34a]"><svg class="block h-2.5 w-2.5" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.2L4.8 8.5L9.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                             </span>
                             <span class="pool-player">
@@ -105,7 +139,7 @@
                                 <span>LREX D-Stunk</span>
                                 <span class="pool-check inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#16a34a]"><svg class="block h-2.5 w-2.5" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.2L4.8 8.5L9.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                             </span>
-                            <span class="pool-muted shrink-0 text-sm font-normal">+6 more</span>
+                            <span class="pool-muted shrink-0 text-sm font-normal">+4 más</span>
                         </div>
                     </a>
                 </li>
@@ -116,10 +150,6 @@
                         <span class="pool-muted mt-0.5 block text-sm font-normal">Complete</span>
                     </div>
                     <div class="pool-player-list">
-                        <span class="pool-player">
-                            <span>GPIM...</span>
-                            <span class="pool-check inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#16a34a]"><svg class="block h-2.5 w-2.5" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.2L4.8 8.5L9.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                        </span>
                         <span class="pool-player">
                             <span>Manolo</span>
                             <span class="pool-check inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#16a34a]"><svg class="block h-2.5 w-2.5" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.2L4.8 8.5L9.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
@@ -148,19 +178,11 @@
                     </div>
                     <div class="pool-player-list">
                         <span class="pool-player">
-                            <span>FULLY...</span>
-                            <span class="pool-check inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#16a34a]"><svg class="block h-2.5 w-2.5" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.2L4.8 8.5L9.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                        </span>
-                        <span class="pool-player">
                             <span>FabioStraface</span>
                             <span class="pool-check inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#16a34a]"><svg class="block h-2.5 w-2.5" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.2L4.8 8.5L9.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                         </span>
                         <span class="pool-player">
                             <span>Fen</span>
-                            <span class="pool-check inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#16a34a]"><svg class="block h-2.5 w-2.5" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.2L4.8 8.5L9.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                        </span>
-                        <span class="pool-player">
-                            <span>Hi I'm...</span>
                             <span class="pool-check inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#16a34a]"><svg class="block h-2.5 w-2.5" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.2L4.8 8.5L9.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                         </span>
                         <span class="pool-player">
@@ -226,19 +248,11 @@
                     </div>
                     <div class="pool-player-list">
                         <span class="pool-player">
-                            <span>GPIM...</span>
-                            <span class="pool-check inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#16a34a]"><svg class="block h-2.5 w-2.5" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.2L4.8 8.5L9.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                        </span>
-                        <span class="pool-player">
                             <span>Manolo</span>
                             <span class="pool-check inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#16a34a]"><svg class="block h-2.5 w-2.5" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.2L4.8 8.5L9.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                         </span>
                         <span class="pool-player">
                             <span>KK avioneta</span>
-                            <span class="pool-check inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#16a34a]"><svg class="block h-2.5 w-2.5" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.2L4.8 8.5L9.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                        </span>
-                        <span class="pool-player">
-                            <span>FULLY...</span>
                             <span class="pool-check inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#16a34a]"><svg class="block h-2.5 w-2.5" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.2L4.8 8.5L9.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                         </span>
                         <span class="pool-player">
