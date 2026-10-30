@@ -17,6 +17,11 @@ class UsuarioController
         }
     }
 
+    public static function ctrComprobacionVersionModal()
+    {
+        return isset($_SESSION['usuario']);
+    }
+
     public function ctrLoguearse()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') 

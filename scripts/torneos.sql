@@ -30,7 +30,7 @@ CREATE TABLE `jugador` (
 );
 
 INSERT INTO `jugador` (`id`, `usuario`,`pass`,`nombre`,`apellidos`, `puntuacion`, `img`, `id_region`) VALUES
-(1, 'admin','admin','Szeth','Hijo-Hijo-Vallano', 999,'default.png', 2),
+(1, 'Szeth','admin','Szeth','Hijo-Hijo-Vallano', 999,'default.png', 2),
 (2, 'FabioStraface','FabioStraface','Fabio Jesús','Miguel Straface', 50,'default.png', 1),
 (3, 'Kaladin', 'Kaladin1234', 'Kaladin', 'Bendito por la Tormenta', 900, 'default.png', 1),
 (4, 'Shallan', 'Shallan1234', 'Shallan', 'Davar', 700, 'default.png', 3),
@@ -196,17 +196,6 @@ INSERT INTO `personaje` (`id`, `nombre`, `logo`) VALUES
 (6, 'Spiderman', 'logo_default.png'),
 (7, 'Vinicius', 'logo_default.png');
 
-CREATE TABLE `partida` (
- `id` int(5) NOT NULL PRIMARY KEY AUTO_INCREMENT,
- `nombre_partida` VARCHAR(150) NOT NULL
-);
-
-INSERT INTO `partida` (`id`, `nombre_partida`) VALUES
-(1,'Game 1'),
-(2,'Game 2'),
-(3,'Game 3'),
-(4,'Game 4'),
-(5,'Game 5');
 
 CREATE TABLE `ranking` (
  `id` int(5) NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -242,10 +231,31 @@ CREATE TABLE `torneo` (
 );
 
 INSERT INTO `torneo` (`id_torneo`, `nombre`, `lugar`, `descripcion`, `fecha_inicio`, `fecha_fin`, `img`, `max_entrant`,`id_ranking`, `id_region`, `id_usuario`) VALUES
-(1,'RPLHouse','Sevilla','Torneo principal de la temporada','2026-10-23 13:13:00','2026-10-25 13:13:00', '1.jpg', 32,1, 2, 2),
-(2,'Sherry','Jerez de la frontera','Torneo para jugadores de las posiciones inferiores','2026-12-12 13:13:00','2026-12-14 13:13:00','2.jpg', 64,3, 8, 3),
-(3,'Area Zero','Madrid','Torneo para jugadores de nivel intermedio','2026-12-23 13:13:00','2026-12-25 13:13:00', '3.jpg', 128,4, 3, 5),
-(4,'Tram segunda parada','Barcelona','Torneo Nacional donde se reune el mejor nivel','2026-12-28 13:13:00','2026-12-31 13:13:00', '1.jpg', 128,2, 4, 3);
+(1,'RPLHouse','Sevilla','Torneo principal de la temporada','2026-10-29 13:13:00','2026-10-31 13:13:00', '1.jpg', 32,1, 2, 2),
+(2,'Sherry','Jerez de la frontera','Torneo para jugadores de las posiciones inferiores','2026-10-29 13:13:00','2026-10-31 13:13:00','2.jpg', 64,3, 8, 3),
+(3,'Area Zero','Madrid','Torneo para jugadores de nivel intermedio','2026-10-29 13:13:00','2026-10-31 13:13:00', '3.jpg', 128,4, 3, 5),
+(4,'Tram segunda parada','Barcelona','Torneo Nacional donde se reune el mejor nivel','2026-10-29 13:13:00','2026-10-31 13:13:00', '1.jpg', 128,2, 4, 3);
+
+CREATE TABLE `partidas` (
+ `id` int(5) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+ `id_jugador1` int(5) NULL,
+ `id_personaje1` int(5) NULL,
+ `id_jugador2` int(5) NULL,
+ `id_personaje2` int(5) NULL,
+ `id_torneo` int(5) NOT NULL,
+ `puntuacion_conseguida` int(5) NULL,
+ `ronda` varchar(150) NOT NULL,
+ `game` INT(5) NULL CHECK (`game` IN (1, 2, 3, 4, 5)),
+ `pools` INT(5) NULL CHECK (`game` IN (1, 2, 3, 4, 5)),
+ `ganador` int(5) NULL,
+  CONSTRAINT fk_jugador1 FOREIGN KEY (id_jugador1) REFERENCES jugador(id) ON DELETE restrict ON UPDATE cascade,
+  CONSTRAINT fk_personaje1 FOREIGN KEY (id_personaje1) REFERENCES personaje(id) ON DELETE restrict ON UPDATE cascade,
+  CONSTRAINT fk_jugador2 FOREIGN KEY (id_jugador2) REFERENCES jugador(id) ON DELETE restrict ON UPDATE cascade,
+  CONSTRAINT fk_personaje2 FOREIGN KEY (id_personaje2) REFERENCES personaje(id) ON DELETE restrict ON UPDATE cascade,
+  CONSTRAINT fk_torneo_partida FOREIGN KEY (id_torneo) REFERENCES torneo(id_torneo) ON DELETE restrict ON UPDATE cascade,
+  CONSTRAINT fk_ganador FOREIGN KEY (ganador) REFERENCES jugador(id) ON DELETE restrict ON UPDATE cascade
+);
+
 
 CREATE TABLE `torneo_jugador` (
  `id` int(5) NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -264,50 +274,4 @@ INSERT INTO `torneo_jugador` (`id`, `id_torneos`, `id_jugador`, `seed`) VALUES
 (21, 1, 21, 16),(22, 1, 22, 15),(23, 1, 23, 19),(24, 1, 24, 25),(25, 1, 25, 9),
 (26, 1, 26, 18),(27, 1, 27, 20),(28, 1, 28, 8),(29, 1, 29, 12),(30, 1, 30, 10),
 (31, 1, 31, 11),(32, 1, 32, 23);
-
-
-
-CREATE TABLE `jugador_partida` (
- `id` int(5) NOT NULL PRIMARY KEY AUTO_INCREMENT,
- `id_jugador` int(5) NOT NULL,
- `id_partida` int(5) NOT NULL,
- CONSTRAINT fk_juega_jugador FOREIGN KEY (id_jugador) REFERENCES jugador(id) ON DELETE restrict ON UPDATE cascade,
- CONSTRAINT fk_juega_partida FOREIGN KEY (id_partida) REFERENCES partida(id) ON DELETE restrict ON UPDATE cascade
-);
-
-INSERT INTO `jugador_partida` (`id`, `id_jugador`, `id_partida`) VALUES
-(1,1,1),
-(2,2,1),
-(3,3,2),
-(4,4,2),
-(5,5,3),
-(6,6,3),
-(7,1,4),
-(8,3,4),
-(9,5,5),
-(10,6,5),
-(11,3,3),
-(12,4,3);
-
-CREATE TABLE `jugador_personaje_partida` (
- `id` int(5) NOT NULL PRIMARY KEY AUTO_INCREMENT,
- `id_jugador` int(5) NOT NULL,
- `id_personaje` int(5) NOT NULL,
- `id_partida` int(5) NOT NULL,
- CONSTRAINT fk_utiliza_jugador FOREIGN KEY (id_jugador) REFERENCES jugador(id) ON DELETE restrict ON UPDATE cascade,
- CONSTRAINT fk_utiliza_personaje FOREIGN KEY (id_personaje) REFERENCES personaje(id) ON DELETE restrict ON UPDATE cascade,
- CONSTRAINT fk_utiliza_partida FOREIGN KEY (id_partida) REFERENCES partida(id) ON DELETE restrict ON UPDATE cascade
-);
-
-INSERT INTO `jugador_personaje_partida` (`id`, `id_jugador`, `id_personaje`, `id_partida`) VALUES
-(1,1,1,1),
-(2,2,3,1),
-(3,3,2,2),
-(4,4,4,2),
-(5,5,5,3),
-(6,6,6,3),
-(7,1,1,4),
-(8,3,2,4),
-(9,5,5,5),
-(10,6,4,5);
 

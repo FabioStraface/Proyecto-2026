@@ -60,4 +60,15 @@ class TorneoModel{
         $sentencia = null;
     }
 
+    public static function mdlSacarSeedTorneo($tabla, $campo, $seed, $id)
+    {
+        $conexion = Conexion::conectar();
+        $consulta = $conexion->query("SELECT * FROM $tabla WHERE $campo LIKE '$id' AND seed LIKE '$seed'");
+        $registros = $consulta->fetch();
+        return $registros;
+
+        $sentencia->close();
+        $sentencia = null;
+    }
+
 }

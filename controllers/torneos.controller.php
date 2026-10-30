@@ -29,7 +29,7 @@ class TorneoController{
     //Creo mi propio array orientado a objetos
     public $MiSeed = [];
 
-    public function ctrSacarPools($id)
+    public function ctrSacarSeeding($id)
     {
         $tabla = "torneo_jugador";
         $campo = "id_torneos";
@@ -48,9 +48,11 @@ class TorneoController{
             // Serian 33 por que por ejemplo el seed 1 iria contra el 32, el 2 iria contra el 31
             $NumeroMagico = $totalAsistentes + 1;
             $cont = 0;
+            $numeromaximotorneo = (int) $torneo['max_entrant'];
+            $MaxCont = count($registrosSeed) / 2;
             foreach ($registrosSeed as $key => $seed) 
             {
-                if ($cont == 16) {
+                if ($cont == $MaxCont) {
                     break;
                 }
                 $SegundoSeed = $NumeroMagico - $seed['seed'];
@@ -92,6 +94,14 @@ class TorneoController{
         }
 
         return $this->MiSeed;
+    }
+
+    public function ctrSacarSeedDelTorneo($seed, $id)
+    {
+        $tabla = "torneo_jugador";
+        $campo = "id_torneos";
+        $respuesta = TorneoModel::mdlSacarSeedTorneo($tabla,$campo,$seed,$id);
+        return $respuesta;
     }
 
 }
