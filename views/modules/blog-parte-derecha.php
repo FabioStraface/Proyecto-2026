@@ -29,7 +29,8 @@
         <h4 class="blog_sidebar_title">Nuestro Torneo</h4>
         <ul>
             <li><a href="torneo-resumen&id=<?= $_GET['id'] ?>"><i class="ti-arrow-right"></i>Bracket</a></li>
-            <li><a href="asistentes&id=<?= $_GET['id'] ?>"><i class="ti-arrow-right"></i>Asistentes</a></li>
+            <!-- Asistentes = lista de apuntados reales de este torneo -->
+            <li><a href="torneo-participantes&id=<?= (int) $_GET['id'] ?>"><i class="ti-arrow-right"></i>Asistentes</a></li>
         </ul>
     </div>	
     <?php

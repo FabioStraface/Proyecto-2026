@@ -33,7 +33,7 @@
             $jugadorMalo = $usuario->ctrSacarUsuario($seedAlto['id_jugador']);
 
             //Ahora voy a guardar los datos preliminares de las partidas base
-            $partida = $eliminatoria->ctrCrearPartidaPreliminar($seedBajo['id_jugador'], $seedAlto['id_jugador'], $_GET['id'], $abecedario[$u], $_GET['pool']);
+            $partida = $eliminatoria->ctrCrearPartidaPreliminar($seedBajo['id_jugador'], $seedAlto['id_jugador'], $_GET['id'], $abecedario[$u], $_GET['pool']); 
 
             switch ($u) 
             {
@@ -48,79 +48,92 @@
                 break;
             } 
 
-    ?>
-    <!-- WINNERS QUARTER FINAL -->
-    
-    <?php
-        //Voy a comprobar si el combate tiene resultado si lo tiene saldra el modal de resultados y sino el de reportar
-        $reportar =  $eliminatoria->ctrBuscarSiEstasReportado($_GET['id'], $abecedario[$u], $_GET['pool']);
-        if (is_null($reportar)) 
-        {
-    ?>
-    <div class="bp-cell col-start-1 row-start-<?= $recorrerbracket ?> row-span-2"><span class="bp-tag"><?= $abecedario[$u] ?></span>
-        <a href="#match-report-modal" class="js-match-modal bracket-match rounded-md border border-gray-200 bg-white shadow-sm"
-            data-mode="report"
-            data-round="Winners Quarter-Final"
-            data-p1="<?= htmlspecialchars($jugadorBueno['usuario'], ENT_QUOTES, 'UTF-8') ?>"
-            data-p2="<?= htmlspecialchars($jugadorMalo['usuario'], ENT_QUOTES, 'UTF-8') ?>"
-            data-s1="3"
-            data-s2="1">
-    <?php
-        }
-        else 
-        {
-    ?>
-    <div class="bp-cell col-start-1 row-start-<?= $recorrerbracket ?> row-span-2"><span class="bp-tag"><?= $abecedario[$u] ?></span>
-        <a href="#match-modal" class="js-match-modal bracket-match rounded-md border border-gray-200 bg-white shadow-sm"
-            data-mode="result"
-            data-round="Winners Quarter-Final"
-            data-p1="<?= htmlspecialchars($jugadorBueno['usuario'], ENT_QUOTES, 'UTF-8') ?>"
-            data-p2="<?= htmlspecialchars($jugadorMalo['usuario'], ENT_QUOTES, 'UTF-8') ?>"
-            data-s1="3"
-            data-s2="1">
-    <?php
-        }
-    ?>
-            <div class="bp-row border-b border-gray-100">
-                <span class="bp-seed"><?= $seedBajo['seed'] ?></span>
-                <span class="bp-name font-semibold text-slate-800"><?= $jugadorBueno['usuario'] ?></span>
-            </div>
-            <div class="bp-row">
-                <span class="bp-seed"><?= $seedAlto['seed'] ?></span>
-                <span class="bp-name font-semibold text-slate-800"><?= $jugadorMalo['usuario'] ?></span>
-            </div>
-        </a>
-    </div>
-    <?php
+            /* Resumen del set: si ya hay games, la caja cambia de diseño */
+            $cajaResumen = $eliminatoria->ctrSacarResumenSet($_GET['id'], $abecedario[$u], $_GET['pool']);
+
+            /* WINNERS QUARTER FINAL */
+            $cajaLetra = $abecedario[$u];
+            $cajaCol = 1;
+            $cajaRow = $recorrerbracket;
+            $cajaSpan = 2;
+            $cajaRondaNombre = "Winners Quarter-Final";
+            $cajaEspera1 = "";
+            $cajaEspera2 = "";
+            $cajaId1 = $seedBajo['id_jugador'];
+            $cajaId2 = $seedAlto['id_jugador'];
+            $cajaNom1 = $jugadorBueno['usuario'];
+            $cajaNom2 = $jugadorMalo['usuario'];
+            $cajaSeed1 = $seedBajo['seed'];
+            $cajaSeed2 = $seedAlto['seed'];
+            $cajaTop16 = false;
+            include("caja-enfrentamiento.php");
+
             $u++;
             $recorrerbracket = $recorrerbracket + 2;
         }
+
+        /* ============================================================
+           WINNERS SEMI FINAL
+           E = ganador de A vs ganador de B
+           F = ganador de C vs ganador de D
+           Solo se crea el preliminar cuando los dos orígenes
+           ya están reportados.
+           ============================================================ */
+        $resumenA = $eliminatoria->ctrSacarResumenSet($_GET['id'], "A", $_GET['pool']);
+        $resumenB = $eliminatoria->ctrSacarResumenSet($_GET['id'], "B", $_GET['pool']);
+        $resumenC = $eliminatoria->ctrSacarResumenSet($_GET['id'], "C", $_GET['pool']);
+        $resumenD = $eliminatoria->ctrSacarResumenSet($_GET['id'], "D", $_GET['pool']);
+
+        $slot1 = $eliminatoria->ctrCargarSlot($resumenA, "ganador", $usuario, $torneo, $_GET['id']);
+        $slot2 = $eliminatoria->ctrCargarSlot($resumenB, "ganador", $usuario, $torneo, $_GET['id']);
+        $cajaId1 = $slot1['id'];
+        $cajaNom1 = $slot1['nombre'];
+        $cajaSeed1 = $slot1['seed'];
+        $cajaId2 = $slot2['id'];
+        $cajaNom2 = $slot2['nombre'];
+        $cajaSeed2 = $slot2['seed'];
+        $cajaResumen = array("reportado" => false);
+        if ($cajaId1 && $cajaId2) 
+        {
+            $eliminatoria->ctrCrearPartidaPreliminar($cajaId1, $cajaId2, $_GET['id'], "E", $_GET['pool']);
+            $cajaResumen = $eliminatoria->ctrSacarResumenSet($_GET['id'], "E", $_GET['pool']);
+        }
+
+        $cajaLetra = "E";
+        $cajaCol = 2;
+        $cajaRow = 2;
+        $cajaSpan = 4;
+        $cajaRondaNombre = "Winners Semi-Final";
+        $cajaEspera1 = "winner of A";
+        $cajaEspera2 = "winner of B";
+        $cajaTop16 = true;
+        include("caja-enfrentamiento.php");
+
+        $slot1 = $eliminatoria->ctrCargarSlot($resumenC, "ganador", $usuario, $torneo, $_GET['id']);
+        $slot2 = $eliminatoria->ctrCargarSlot($resumenD, "ganador", $usuario, $torneo, $_GET['id']);
+        $cajaId1 = $slot1['id'];
+        $cajaNom1 = $slot1['nombre'];
+        $cajaSeed1 = $slot1['seed'];
+        $cajaId2 = $slot2['id'];
+        $cajaNom2 = $slot2['nombre'];
+        $cajaSeed2 = $slot2['seed'];
+        $cajaResumen = array("reportado" => false);
+        if ($cajaId1 && $cajaId2) 
+        {
+            $eliminatoria->ctrCrearPartidaPreliminar($cajaId1, $cajaId2, $_GET['id'], "F", $_GET['pool']);
+            $cajaResumen = $eliminatoria->ctrSacarResumenSet($_GET['id'], "F", $_GET['pool']);
+        }
+
+        $cajaLetra = "F";
+        $cajaCol = 2;
+        $cajaRow = 6;
+        $cajaSpan = 4;
+        $cajaRondaNombre = "Winners Semi-Final";
+        $cajaEspera1 = "winner of C";
+        $cajaEspera2 = "winner of D";
+        $cajaTop16 = true;
+        include("caja-enfrentamiento.php");
     ?>
-
-    <!-- WINNERS SEMI FINAL -->
-
-    <div class="bp-cell col-start-2 row-start-2 row-span-4"><span class="bp-tag">E</span>
-        <a href="#match-modal" class="js-match-modal bracket-match rounded-md border border-gray-200 bg-white shadow-sm"
-            data-mode="result"
-            data-round="Winners Semi-Final"
-            data-p1="winner of A"
-            data-p2="winner of B">
-            <div class="bp-row border-b border-gray-100"><span class="bp-wait">winner of A</span></div>
-            <div class="bp-row"><span class="bp-wait">winner of B</span></div>
-        </a><span class="ml-2 w-8 shrink-0 border-t border-dashed border-gray-300"></span><a href="#"
-            class="bp-top">Top 16</a>
-    </div>
-    <div class="bp-cell col-start-2 row-start-6 row-span-4"><span class="bp-tag">F</span>
-        <a href="#match-report-modal" class="js-match-modal bracket-match rounded-md border border-gray-200 bg-white shadow-sm"
-            data-mode="report"
-            data-round="Winners Semi-Final"
-            data-p1="winner of C"
-            data-p2="winner of D">
-            <div class="bp-row border-b border-gray-100"><span class="bp-wait">winner of C</span></div>
-            <div class="bp-row"><span class="bp-wait">winner of D</span></div>
-        </a><span class="ml-2 w-8 shrink-0 border-t border-dashed border-gray-300"></span><a href="#"
-            class="bp-top">Top 16</a>
-    </div>
 </div>
 
 <!-- MODAL CON LOS RESULTADOS YA HECHOS -->

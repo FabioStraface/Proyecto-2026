@@ -17,8 +17,15 @@
 <?php
     $torneo = new TorneoController();
     $usuario = new UsuarioController();
+    $eliminatoria = new PartidasController();
+    /* Si el torneo esta en curso y faltan plazas, relleno con NPC */
+    $torneo->ctrRellenarConNpc($_GET['id']);
     $Asistentes = $torneo->ctrSacarTotalAsistentes($_GET['id']); //Esto saca todos los usuarios apuntados a este torneo
     $valor = $torneo->ctrSacarTorneo($_GET['id']); //Saca todos los datos del torneo correspondiente
+
+    /* Top 16: solo se pinta el bloque si los 16 ya han salido de las pools */
+    $jugadoresTop16 = $eliminatoria->ctrSacarJugadoresTop16($_GET['id'], $torneo);
+    $hayTop16Completo = (count($jugadoresTop16) == 16);
 
     // Fechas actuales y del torneo
     $fechaActual = date("d/m/Y");
@@ -27,6 +34,8 @@
 
     //Sacar Seeding del torneo
     $seeds = $torneo->ctrSacarSeeding($_GET['id']);
+
+    include("torneo-nav.php");
     //var_dump($pools);
     /*foreach ($seeds as $key => $value) 
     {
@@ -167,20 +176,18 @@
                 ?>
             </ul>
         </article>
-        <!-- TOP 8 -->
+        <?php
+            /* El bloque Top 16 no sale hasta que las 4 pools hayan mandado a sus 4 clasificados */
+            if ($hayTop16Completo) 
+            {
+        ?>
         <article class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
             <div class="flex flex-col gap-3 px-5 py-5 sm:flex-row sm:items-start sm:justify-between sm:px-6">
                 <div>
                     <div class="flex flex-wrap items-center gap-2">
                         <h2 class="m-0 font-sans text-[22px] leading-tight font-bold text-gray-900">Top 16</h2>
                         <?php
-                            if ($fechaInicio > $fechaActual) 
-                            {
-                        ?>
-                        <span class="rounded bg-gray-500 px-2 py-0.5 text-[10px] font-bold tracking-wide text-white uppercase">Sin iniciar</span>
-                        <?php
-                            }
-                            elseif ($fechaFinal < $fechaActual) 
+                            if (!empty($valor['estado'])) 
                             {
                         ?>
                         <span class="rounded bg-gray-500 px-2 py-0.5 text-[10px] font-bold tracking-wide text-white uppercase">Completado</span>
@@ -207,20 +214,15 @@
                     </div>
                     <div class="pool-player-list">
                         <?php
-                            $u = 0;
-                            foreach ($seeds as $key => $pool) 
+                            /* Solo los 4 mejores (seed mas baja) de los 16 clasificados */
+                            for ($u = 0; $u < 4; $u++) 
                             {
-                                if ($u == 4) 
-                                {
-                                    break;
-                                }
-                                $jugador = $usuario->ctrSacarUsuario($pool['idJugadorSeedBajo']);
+                                $jugadorTop = $usuario->ctrSacarUsuario($jugadoresTop16[$u]['id']);
                         ?>
                         <span class="pool-player">
-                            <span><?= $jugador['usuario'] ?></span>
+                            <span><?= htmlspecialchars($jugadorTop['usuario'], ENT_QUOTES, 'UTF-8') ?></span>
                         </span>
                         <?php
-                                $u++;
                             }
                         ?>
                         <span class="pool-muted shrink-0 text-sm font-normal">+12 más</span>
@@ -229,6 +231,9 @@
                 </li>
             </ul>
         </article>
+        <?php
+            }
+        ?>
 
     </div>
 </section>

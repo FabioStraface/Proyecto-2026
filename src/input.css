@@ -119,20 +119,144 @@ a.bracket-match:active {
 
 .bp-w {
     display: grid;
+    width: max-content;
     grid-template-columns: 230px 230px max-content;
+    grid-template-rows: auto repeat(8, 3.5rem);
+    column-gap: 1.5rem;
+    row-gap: 0.35rem;
+    align-items: center;
+}
+
+.bp-l {
+    display: grid;
+    width: max-content;
+    grid-template-columns: 230px 230px 230px max-content;
+    grid-template-rows: auto repeat(5, 3.5rem);
+    column-gap: 1.5rem;
+    row-gap: 0.4rem;
+    align-items: center;
+}
+
+/* El bloque entero se centra; winners y losers comparten el mismo borde izquierdo */
+.bp-bracket-page {
+    width: fit-content;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    overflow-x: hidden;
+}
+
+.bp-bracket-page::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+/* Pool de 16: columna = caja, no 1fr (el 1fr dejaba el hueco rojo entre rondas) */
+.bp-w-64 {
+    display: grid;
+    width: max-content;
+    grid-template-columns: 230px 230px max-content;
+    grid-template-rows: auto repeat(8, 3.5rem);
+    column-gap: 1.5rem;
+    row-gap: 0.35rem;
+    align-items: center;
+}
+
+.bp-l-64 {
+    display: grid;
+    width: max-content;
+    grid-template-columns: 230px 230px 230px max-content;
+    grid-template-rows: auto repeat(8, 3.5rem);
+    column-gap: 1.5rem;
+    row-gap: 0.4rem;
+    align-items: center;
+}
+
+/* Bracket final Top 16: pills de origen + 4 rondas winners / 6 losers */
+.bp-final-w {
+    display: grid !important;
+    width: max-content;
+    grid-template-columns: 148px 230px 230px 230px 230px 230px;
     grid-template-rows: auto repeat(8, 3.35rem);
     column-gap: 1.5rem;
     row-gap: 0.2rem;
     align-items: center;
 }
 
-.bp-l {
-    display: grid;
-    grid-template-columns: 230px 230px 230px max-content;
-    grid-template-rows: auto repeat(5, 3.35rem);
+.bp-final-l {
+    display: grid !important;
+    width: max-content;
+    grid-template-columns: 148px 230px 230px 230px 230px 230px 230px;
+    grid-template-rows: auto repeat(8, 3.35rem);
     column-gap: 1.5rem;
-    row-gap: 0.25rem;
+    row-gap: 0.2rem;
     align-items: center;
+}
+
+/* Columna, fila y span fijos: Tailwind no ve las clases PHP (col-start-<?= ?>) */
+.bp-c1 { grid-column-start: 1; }
+.bp-c2 { grid-column-start: 2; }
+.bp-c3 { grid-column-start: 3; }
+.bp-c4 { grid-column-start: 4; }
+.bp-c5 { grid-column-start: 5; }
+.bp-c6 { grid-column-start: 6; }
+.bp-c7 { grid-column-start: 7; }
+.bp-r1 { grid-row-start: 1; }
+.bp-r2 { grid-row-start: 2; }
+.bp-r3 { grid-row-start: 3; }
+.bp-r4 { grid-row-start: 4; }
+.bp-r5 { grid-row-start: 5; }
+.bp-r6 { grid-row-start: 6; }
+.bp-r7 { grid-row-start: 7; }
+.bp-r8 { grid-row-start: 8; }
+.bp-s1 { grid-row-end: span 1; }
+.bp-s2 { grid-row-end: span 2; }
+.bp-s4 { grid-row-end: span 4; }
+.bp-s8 { grid-row-end: span 8; }
+
+.bp-feed {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+    min-width: 0;
+}
+
+.bp-feed-line {
+    display: flex;
+    height: 24px;
+    align-items: center;
+    gap: 6px;
+}
+
+.bp-feed-line::after {
+    content: "";
+    flex: 1;
+    border-top: 2px dashed #d1d5db;
+}
+
+.bp-pill,
+a.bp-pill,
+a.bp-pill:link,
+a.bp-pill:visited,
+a.bp-pill:hover,
+a.bp-pill:focus,
+a.bp-pill:active {
+    display: flex;
+    height: 24px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    border: 1px solid #d1d5db !important;
+    background: #fff !important;
+    padding: 0 10px;
+    font-size: 11px;
+    color: #6b7280 !important;
+    white-space: nowrap;
+    text-decoration: none !important;
+    font-family: "Poppins", sans-serif !important;
 }
 
 .bp-title {
@@ -391,6 +515,37 @@ a.bp-top:active {
     text-align: left;
 }
 
+/* Nombre + seed en una fila; el rec (3-1) queda debajo sin bajar el seed */
+.mm-player-meta {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+}
+
+.mm-player-l .mm-player-meta {
+    align-items: flex-end;
+}
+
+.mm-player-r .mm-player-meta {
+    align-items: flex-start;
+}
+
+.mm-player-line {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 8px;
+}
+
+.mm-seed-tag {
+    flex-shrink: 0;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #9ca3af;
+    font-variant-numeric: tabular-nums;
+}
+
 .mm-name {
     min-width: 0;
     overflow: hidden;
@@ -398,6 +553,7 @@ a.bp-top:active {
     white-space: nowrap;
     font-size: 18px;
     font-weight: 700;
+    line-height: 1.2;
     color: #111827 !important;
 }
 
@@ -541,10 +697,26 @@ a.bp-top:active {
     color: #111827;
 }
 
+/* Icono arriba y nombre debajo, igual en los dos lados del reporte */
 .mm-pick {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
     cursor: pointer;
     border-radius: 6px;
     padding: 6px 8px;
+}
+
+.mm-pick-name {
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 12px;
+    font-weight: 500;
+    color: #9ca3af;
+    text-align: center;
 }
 
 .mm-pick input {
@@ -581,4 +753,267 @@ a.bp-top:active {
     background: #15803d;
     color: #fff !important;
     text-decoration: none !important;
+}
+
+/* ============================================================
+   NAV DEL TORNEO (debajo del bloque azul)
+   Solo resumen, pools, final, participantes y posicionamiento.
+   ============================================================ */
+.tnav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 4px 8px;
+    border-bottom: 1px solid #e5e7eb;
+    background: #fff;
+    padding: 0 16px;
+}
+
+.tnav-link,
+a.tnav-link,
+a.tnav-link:link,
+a.tnav-link:visited {
+    display: inline-flex;
+    align-items: center;
+    padding: 14px 16px;
+    color: #334155 !important;
+    font-family: "Poppins", sans-serif !important;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none !important;
+    border-bottom: 3px solid transparent;
+}
+
+a.tnav-link:hover,
+a.tnav-link:focus {
+    color: #0e5ca6 !important;
+    text-decoration: none !important;
+}
+
+.tnav-on,
+a.tnav-on,
+a.tnav-on:link,
+a.tnav-on:visited,
+a.tnav-on:hover {
+    color: #0e5ca6 !important;
+    border-bottom-color: #0e5ca6;
+}
+
+/* ============================================================
+   PARTICIPANTES: standing + buscador + lista de 8
+   ============================================================ */
+.tp-card {
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.tp-stand-head,
+.tp-stand-row.is-on {
+    display: grid;
+    grid-template-columns: 36px minmax(140px, 1.3fr) 56px 86px 86px 110px minmax(140px, 1.2fr);
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+}
+
+.tp-stand-head {
+    border-bottom: 1px solid #e5e7eb;
+    color: #64748b;
+    font-family: "Poppins", sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.tp-stand-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.tp-stand-row {
+    border-bottom: 1px solid #f1f5f9;
+    color: #334155;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+}
+
+.tp-stand-row:last-child {
+    border-bottom: 0;
+}
+
+.tp-rank {
+    color: #0f172a;
+    font-weight: 700;
+}
+
+.tp-player {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+.tp-player strong {
+    overflow: hidden;
+    color: #0f172a;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.tp-avatar {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    border: 1px solid #e5e7eb;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #e2e8f0;
+}
+
+.tp-col-num,
+.tp-col-pct,
+.tp-col-seed {
+    text-align: center;
+}
+
+.tp-col-lost {
+    color: inherit;
+    line-height: 1.35;
+    white-space: normal;
+}
+
+.tp-search-wrap {
+    position: relative;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 14px 16px;
+}
+
+.tp-search-ico {
+    position: absolute;
+    top: 50%;
+    left: 28px;
+    color: #94a3b8;
+    font-size: 18px;
+    transform: translateY(-50%);
+}
+
+.tp-search {
+    display: block;
+    width: 100%;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #fff;
+    padding: 10px 14px 10px 40px;
+    color: #0f172a;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+}
+
+.tp-search:focus {
+    border-color: #93c5fd;
+    outline: none;
+}
+
+.tp-stand-row {
+    display: none;
+}
+
+.tp-pager {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    padding: 16px;
+}
+
+.tp-page {
+    min-width: 36px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #fff;
+    padding: 6px 10px;
+    color: #334155;
+    font-family: "Poppins", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.tp-page.is-on,
+.tp-page:hover {
+    border-color: #0e5ca6;
+    color: #0e5ca6;
+}
+
+/* Participantes: foto, nick y seed mas grandes; seed a la derecha */
+.tp-card-lista .tp-stand-head,
+.tp-card-lista .tp-stand-row.is-on {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 18px 28px;
+}
+
+.tp-card-lista .tp-col-player,
+.tp-card-lista .tp-player {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.tp-card-lista .tp-avatar {
+    width: 64px;
+    height: 64px;
+}
+
+.tp-card-lista .tp-player {
+    gap: 16px;
+}
+
+.tp-card-lista .tp-player strong {
+    font-size: 22px;
+}
+
+.tp-card-lista .tp-col-seed {
+    flex: 0 0 auto;
+    min-width: 5rem;
+    text-align: right;
+}
+
+.tp-card-lista .tp-stand-row .tp-col-seed {
+    color: #0f172a;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+@media (max-width: 720px) {
+    .tp-stand-head,
+    .tp-stand-row.is-on {
+        grid-template-columns: 28px minmax(0, 1fr) 44px 48px 56px;
+        padding: 10px 12px;
+    }
+
+    .tp-card-lista .tp-stand-head,
+    .tp-card-lista .tp-stand-row.is-on {
+        gap: 20px;
+        padding: 12px 16px;
+    }
+
+    .tp-card-lista .tp-col-player,
+    .tp-card-lista .tp-player {
+        min-width: 0;
+        flex: 1 1 auto;
+    }
+
+    .tp-col-pct,
+    .tp-col-lost {
+        display: none;
+    }
 }

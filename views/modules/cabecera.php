@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="views/assets/css/style.css">			
     <link rel="stylesheet" href="views/assets/css/responsive.css">
     <!-- Tailwind CSS v4: al final para que las utilidades de cabecera/footer no las pise Bootstrap -->
-    <link rel="stylesheet" href="views/assets/css/app.css">
+    <link rel="stylesheet" href="views/assets/css/app.css?v=20261106c">
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>

@@ -137,6 +137,6 @@
         <script src="views/assets/js/scrolltopcontrol.js"></script>																				
     <!-- scripts js -->
         <script src="views/assets/js/scripts.js"></script>
-        <script src="views/assets/js/torneo.js"></script>
+        <script src="views/assets/js/torneo.js?v=20261105k"></script>
 </body>
 </html>

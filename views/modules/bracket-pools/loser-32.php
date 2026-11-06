@@ -3,35 +3,129 @@
     <div class="bp-title col-start-1 row-start-1">Losers Round 1</div>
     <div class="bp-title col-start-2 row-start-1">Losers Quarter-Final</div>
 
-    <!-- LOSERS ROUND 3 -->
+    <?php
+        /* ============================================================
+           LOSERS: avanzo a quien pierde en winners, aunque el rival
+           del siguiente set todavía no esté. Así Szeth (winner of G)
+           aparece en I en cuanto gana G, y el perdedor de F llega
+           cuando F se reporte.
+           G = perdedor de A vs perdedor de B
+           H = perdedor de C vs perdedor de D
+           I = perdedor de F vs ganador de G
+           J = perdedor de E vs ganador de H
+           ============================================================ */
+        $idTorneoCaja = $_GET['id'];
+        $poolCaja = $_GET['pool'];
 
-    <div class="bp-cell col-start-1 row-start-2 row-span-2"><span class="bp-tag">G</span>
-        <a href="#" class="bracket-match rounded-md border border-gray-200 bg-white shadow-sm">
-            <div class="bp-row border-b border-gray-100"><span class="bp-wait">loser of A</span></div>
-            <div class="bp-row"><span class="bp-wait">loser of B</span></div>
-        </a>
-    </div>
-    <div class="bp-cell col-start-1 row-start-5 row-span-2"><span class="bp-tag">H</span>
-        <a href="#" class="bracket-match rounded-md border border-gray-200 bg-white shadow-sm">
-            <div class="bp-row border-b border-gray-100"><span class="bp-wait">loser of C</span></div>
-            <div class="bp-row"><span class="bp-wait">loser of D</span></div>
-        </a>
-    </div>
+        $resumenA = $eliminatoria->ctrSacarResumenSet($idTorneoCaja, "A", $poolCaja);
+        $resumenB = $eliminatoria->ctrSacarResumenSet($idTorneoCaja, "B", $poolCaja);
+        $resumenC = $eliminatoria->ctrSacarResumenSet($idTorneoCaja, "C", $poolCaja);
+        $resumenD = $eliminatoria->ctrSacarResumenSet($idTorneoCaja, "D", $poolCaja);
+        $resumenE = $eliminatoria->ctrSacarResumenSet($idTorneoCaja, "E", $poolCaja);
+        $resumenF = $eliminatoria->ctrSacarResumenSet($idTorneoCaja, "F", $poolCaja);
+        $resumenG = $eliminatoria->ctrSacarResumenSet($idTorneoCaja, "G", $poolCaja);
+        $resumenH = $eliminatoria->ctrSacarResumenSet($idTorneoCaja, "H", $poolCaja);
 
-    <!-- LOSERS QUARTER FINAL -->
+        /* ---------- G ---------- */
+        $slot1 = $eliminatoria->ctrCargarSlot($resumenA, "perdedor", $usuario, $torneo, $idTorneoCaja);
+        $slot2 = $eliminatoria->ctrCargarSlot($resumenB, "perdedor", $usuario, $torneo, $idTorneoCaja);
+        $cajaId1 = $slot1['id'];
+        $cajaNom1 = $slot1['nombre'];
+        $cajaSeed1 = $slot1['seed'];
+        $cajaId2 = $slot2['id'];
+        $cajaNom2 = $slot2['nombre'];
+        $cajaSeed2 = $slot2['seed'];
+        $cajaResumen = array("reportado" => false);
+        if ($cajaId1 && $cajaId2) 
+        {
+            $eliminatoria->ctrCrearPartidaPreliminar($cajaId1, $cajaId2, $idTorneoCaja, "G", $poolCaja);
+            $cajaResumen = $eliminatoria->ctrSacarResumenSet($idTorneoCaja, "G", $poolCaja);
+            $resumenG = $cajaResumen;
+        }
+        $cajaLetra = "G";
+        $cajaCol = 1;
+        $cajaRow = 2;
+        $cajaSpan = 2;
+        $cajaRondaNombre = "Losers Round 1";
+        $cajaEspera1 = "loser of A";
+        $cajaEspera2 = "loser of B";
+        $cajaTop16 = false;
+        include("caja-enfrentamiento.php");
 
-    <div class="bp-cell col-start-2 row-start-2 row-span-2"><span class="bp-tag">I</span>
-        <a href="#" class="bracket-match rounded-md border border-gray-200 bg-white shadow-sm">
-            <div class="bp-row border-b border-gray-100"><span class="bp-wait">loser of F</span></div>
-            <div class="bp-row"><span class="bp-wait">winner of G</span></div>
-        </a><span class="ml-2 w-8 shrink-0 border-t border-dashed border-gray-300"></span><a href="#"
-            class="bp-top">Top 16</a>
-    </div>
-    <div class="bp-cell col-start-2 row-start-5 row-span-2"><span class="bp-tag">J</span>
-        <a href="#" class="bracket-match rounded-md border border-gray-200 bg-white shadow-sm">
-            <div class="bp-row border-b border-gray-100"><span class="bp-wait">loser of E</span></div>
-            <div class="bp-row"><span class="bp-wait">winner of H</span></div>
-        </a><span class="ml-2 w-8 shrink-0 border-t border-dashed border-gray-300"></span><a href="#"
-            class="bp-top">Top 16</a>
-    </div>
+        /* ---------- H ---------- */
+        $slot1 = $eliminatoria->ctrCargarSlot($resumenC, "perdedor", $usuario, $torneo, $idTorneoCaja);
+        $slot2 = $eliminatoria->ctrCargarSlot($resumenD, "perdedor", $usuario, $torneo, $idTorneoCaja);
+        $cajaId1 = $slot1['id'];
+        $cajaNom1 = $slot1['nombre'];
+        $cajaSeed1 = $slot1['seed'];
+        $cajaId2 = $slot2['id'];
+        $cajaNom2 = $slot2['nombre'];
+        $cajaSeed2 = $slot2['seed'];
+        $cajaResumen = array("reportado" => false);
+        if ($cajaId1 && $cajaId2) 
+        {
+            $eliminatoria->ctrCrearPartidaPreliminar($cajaId1, $cajaId2, $idTorneoCaja, "H", $poolCaja);
+            $cajaResumen = $eliminatoria->ctrSacarResumenSet($idTorneoCaja, "H", $poolCaja);
+            $resumenH = $cajaResumen;
+        }
+        $cajaLetra = "H";
+        $cajaCol = 1;
+        $cajaRow = 5;
+        $cajaSpan = 2;
+        $cajaRondaNombre = "Losers Round 1";
+        $cajaEspera1 = "loser of C";
+        $cajaEspera2 = "loser of D";
+        $cajaTop16 = false;
+        include("caja-enfrentamiento.php");
+
+        /* ---------- I : loser of F vs winner of G ---------- */
+        $slot1 = $eliminatoria->ctrCargarSlot($resumenF, "perdedor", $usuario, $torneo, $idTorneoCaja);
+        $slot2 = $eliminatoria->ctrCargarSlot($resumenG, "ganador", $usuario, $torneo, $idTorneoCaja);
+        $cajaId1 = $slot1['id'];
+        $cajaNom1 = $slot1['nombre'];
+        $cajaSeed1 = $slot1['seed'];
+        $cajaId2 = $slot2['id'];
+        $cajaNom2 = $slot2['nombre'];
+        $cajaSeed2 = $slot2['seed'];
+        $cajaResumen = array("reportado" => false);
+        if ($cajaId1 && $cajaId2) 
+        {
+            $eliminatoria->ctrCrearPartidaPreliminar($cajaId1, $cajaId2, $idTorneoCaja, "I", $poolCaja);
+            $cajaResumen = $eliminatoria->ctrSacarResumenSet($idTorneoCaja, "I", $poolCaja);
+        }
+        $cajaLetra = "I";
+        $cajaCol = 2;
+        $cajaRow = 2;
+        $cajaSpan = 2;
+        $cajaRondaNombre = "Losers Quarter-Final";
+        $cajaEspera1 = "loser of F";
+        $cajaEspera2 = "winner of G";
+        $cajaTop16 = true;
+        include("caja-enfrentamiento.php");
+
+        /* ---------- J : loser of E vs winner of H ---------- */
+        $slot1 = $eliminatoria->ctrCargarSlot($resumenE, "perdedor", $usuario, $torneo, $idTorneoCaja);
+        $slot2 = $eliminatoria->ctrCargarSlot($resumenH, "ganador", $usuario, $torneo, $idTorneoCaja);
+        $cajaId1 = $slot1['id'];
+        $cajaNom1 = $slot1['nombre'];
+        $cajaSeed1 = $slot1['seed'];
+        $cajaId2 = $slot2['id'];
+        $cajaNom2 = $slot2['nombre'];
+        $cajaSeed2 = $slot2['seed'];
+        $cajaResumen = array("reportado" => false);
+        if ($cajaId1 && $cajaId2) 
+        {
+            $eliminatoria->ctrCrearPartidaPreliminar($cajaId1, $cajaId2, $idTorneoCaja, "J", $poolCaja);
+            $cajaResumen = $eliminatoria->ctrSacarResumenSet($idTorneoCaja, "J", $poolCaja);
+        }
+        $cajaLetra = "J";
+        $cajaCol = 2;
+        $cajaRow = 5;
+        $cajaSpan = 2;
+        $cajaRondaNombre = "Losers Quarter-Final";
+        $cajaEspera1 = "loser of E";
+        $cajaEspera2 = "winner of H";
+        $cajaTop16 = true;
+        include("caja-enfrentamiento.php");
+    ?>
 </div>

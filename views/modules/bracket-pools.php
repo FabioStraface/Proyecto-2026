@@ -1,4 +1,23 @@
-<?php include("cabecera.php"); ?>
+<?php
+    /* ============================================================
+       REPORTAR ANTES DE PINTAR HTML
+       Si proceso el POST a mitad de pagina, el navegador recibe
+       un redirect con la sesion PHP todavía abierta y se queda
+       cargando sin terminar. Por eso guardo, redirijo y salgo.
+       ============================================================ */
+    if (isset($_POST['game1']) && isset($_POST['ronda_letra']) && isset($_POST['jugador1']) && isset($_POST['jugador2']))
+    {
+        $eliminatoriaPost = new PartidasController();
+        $poolsPost = isset($_POST['pools']) ? $_POST['pools'] : $_GET['pool'];
+        $eliminatoriaPost->ctrReportar($_POST['jugador1'], $_POST['jugador2'], $_GET['id'], $_POST['ronda_letra'], $poolsPost);
+        $idTorneoPost = (int) $_GET['id'];
+        $poolPost = (int) $_GET['pool'];
+        header("Location: bracket-pools&id=".$idTorneoPost."&pool=".$poolPost);
+        exit;
+    }
+
+    include("cabecera.php");
+?>
 
 <section class="section-top"
     style="background-image: url(views/assets/img/bg/section-top.png);background-size:cover; background-position: center center;">
@@ -18,6 +37,8 @@
     $usuario = new UsuarioController();
     $eliminatoria = new PartidasController();
     $valor = $torneo->ctrSacarTorneo($_GET['id']); //Saca todos los datos del torneo correspondiente
+    /* Plazas vacias → NPC1, NPC2... para poder pintar el cuadro */
+    $torneo->ctrRellenarConNpc($_GET['id']);
 
     // Fechas actuales y del torneo
     $fechaActual = date("d/m/Y");
@@ -29,26 +50,19 @@
 
     //Sacar Seeding del torneo
     $seeds = $torneo->ctrSacarSeeding($_GET['id']);
-    //var_dump($pools);
-    /*foreach ($seeds as $key => $value) 
-    {
-        echo $value['SeedAlto'];
-        echo " - ";
-        echo $value['SeedBajo'];
-        echo "<br>";
-    }*/
 
-    echo "<pre>";
+    include("torneo-nav.php");
+    //var_dump($pools);
+
+    /*echo "<pre>";
     var_dump($_SERVER['REQUEST_METHOD']);
     var_dump($_POST);
-    echo "</pre>";
-
-    $report = $eliminatoria->ctrReportar();
-    var_dump($report);
+    echo "</pre>";*/
 ?>
 
 <section class="bg-[#f4f6f8] px-4 py-6 font-sans">
-    <div class="mx-auto w-fit max-w-full overflow-x-auto">
+    <!-- Sin overflow-x-auto: esa clase pinta la barra de desplazamiento -->
+    <div class="bp-bracket-page mx-auto">
 
         <?php
         if ($fechaInicio > $fechaActual) 

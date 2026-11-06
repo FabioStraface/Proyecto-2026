@@ -21,6 +21,8 @@
 			$_GET['ruta'] == 'torneo-resumen' ||
 			$_GET['ruta'] == 'bracket-pools' ||
 			$_GET['ruta'] == 'bracket-final' ||
+			$_GET['ruta'] == 'torneo-participantes' ||
+			$_GET['ruta'] == 'torneo-posicionamiento' ||
 			$_GET['ruta'] == 'logout') {
 			
 			include ('modules/'.$_GET['ruta'].'.php');

@@ -5,46 +5,32 @@
             <p id="mm-round" class="mm-round">Winners Semi-Final</p>
         </div>
         <p class="mm-sub">Ultimate Singles - Bracket - Pool A1</p>
+        <!-- Cabecera del set: seed y nombre en la misma linea; el 3-1 va debajo -->
         <div class="mm-score">
             <div class="mm-player mm-player-l">
-                <div>
-                    <span class="js-mm-p1 mm-name">Player 1</span>
-                    <span class="mm-rec">3 - 0</span>
+                <div class="mm-player-meta">
+                    <div class="mm-player-line">
+                        <span class="js-mm-seed1 mm-seed-tag"></span>
+                        <span class="js-mm-p1 mm-name">Player 1</span>
+                    </div>
+                    <span class="js-mm-rec1 mm-rec"></span>
                 </div>
-                <span class="mm-face">👤</span>
+                <span class="js-mm-ico1 mm-face">❔</span>
             </div>
-            <span class="js-mm-s1 mm-pts">3</span>
+            <span class="js-mm-s1 mm-pts">0</span>
             <span class="mm-final">&#9664; FINAL &#9654;</span>
-            <span class="js-mm-s2 mm-pts">1</span>
+            <span class="js-mm-s2 mm-pts">0</span>
             <div class="mm-player mm-player-r">
-                <span class="mm-face">🐷</span>
-                <div>
-                    <span class="js-mm-p2 mm-name">Player 2</span>
-                    <span class="mm-rec">2 - 1</span>
+                <span class="js-mm-ico2 mm-face">❔</span>
+                <div class="mm-player-meta">
+                    <div class="mm-player-line">
+                        <span class="js-mm-p2 mm-name">Player 2</span>
+                        <span class="js-mm-seed2 mm-seed-tag"></span>
+                    </div>
+                    <span class="js-mm-rec2 mm-rec"></span>
                 </div>
             </div>
         </div>
-        <div class="mm-games">
-            <div class="mm-game">
-                <div class="mm-g-l"><span class="mm-face">👤</span><span class="mm-w">W</span><span class="mm-arr">&#9664;</span></div>
-                <div class="mm-g-mid">Game 1</div>
-                <div class="mm-g-r"><span class="mm-arr mm-hide">&#9654;</span><span class="mm-w mm-hide">W</span><span class="mm-face">🐷</span></div>
-            </div>
-            <div class="mm-game">
-                <div class="mm-g-l"><span class="mm-face">👤</span><span class="mm-w">W</span><span class="mm-arr">&#9664;</span></div>
-                <div class="mm-g-mid">Game 2</div>
-                <div class="mm-g-r"><span class="mm-arr mm-hide">&#9654;</span><span class="mm-w mm-hide">W</span><span class="mm-face">🐷</span></div>
-            </div>
-            <div class="mm-game">
-                <div class="mm-g-l"><span class="mm-face">👤</span><span class="mm-w mm-hide">W</span><span class="mm-arr mm-hide">&#9664;</span></div>
-                <div class="mm-g-mid">Game 3</div>
-                <div class="mm-g-r"><span class="mm-arr">&#9654;</span><span class="mm-w">W</span><span class="mm-face">🐷</span></div>
-            </div>
-            <div class="mm-game">
-                <div class="mm-g-l"><span class="mm-face">👤</span><span class="mm-w">W</span><span class="mm-arr">&#9664;</span></div>
-                <div class="mm-g-mid">Game 4</div>
-                <div class="mm-g-r"><span class="mm-arr mm-hide">&#9654;</span><span class="mm-w mm-hide">W</span><span class="mm-face">🐷</span></div>
-            </div>
-        </div>
+        <div id="mm-result-games" class="mm-games"></div>
     </div>
 </div>
